@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import FileMap from "../models/FileMap";
 
+
 /**
  * 查看文件夹内部的所有文件类型的聚类详情
  * 以文件后缀返回统计数据
@@ -20,6 +21,7 @@ import FileMap from "../models/FileMap";
         fileMap.setFileMap(extForShort, stat.size);
     });
     const res = fileMap.getFileTable();
+
     return res;
 }
 

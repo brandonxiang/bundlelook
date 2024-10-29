@@ -1,7 +1,6 @@
 import fg from "fast-glob";
 import path from 'path';
 import fs from "fs";
-
 export const sortFile = (files :string[], dir: string) => {
     return files.map(file => {
         const stat = fs.statSync(path.resolve(dir, file));
@@ -13,7 +12,6 @@ export const sortFile = (files :string[], dir: string) => {
         return b.size - a.size
     });
 }
-
 
 /**
  * 查看文件夹内部的某个文件类型的具体详情

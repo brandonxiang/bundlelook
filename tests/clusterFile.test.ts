@@ -7,8 +7,8 @@ test('get list correctly', async () => {
     const dir = path.resolve('tests/__fixtures__/list');
     const list = await getList({dir});
     const res = [
-      { name: 'js', min: 220, max: 440, total: 660 },
-      { name: 'css', min: 129, max: 129, total: 258 }
+      { name: 'js', min: 220, max: 440, total: 660, file:2 },
+      { name: 'css', min: 129, max: 129, total: 258, file:2 }
     ];
     assert.equal(list, res);
   });
@@ -17,7 +17,7 @@ test('get list by group correctly', async () => {
     const dir = path.resolve('tests/__fixtures__/list');
     const list = await getListByGroup({dir, group:['js,css']});
     const res = [
-      { name: 'js,css', min: 129, max: 440, total: 918 },
+      { name: 'js,css', min: 129, max: 440, total: 918, file: 4 },
     ];
     assert.equal(list, res);
   });

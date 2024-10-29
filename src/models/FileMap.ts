@@ -30,6 +30,7 @@ export default class FileMap {
                 let max: number = fileInfo.max;
                 let min: number = fileInfo.min;
                 let total: number = fileInfo.total;
+                let file: number = fileInfo.file;
                 if(size > fileInfo.max) {
                     max = size;
                 }
@@ -37,16 +38,18 @@ export default class FileMap {
                     min = size;
                 }
                 total = total + size;
+                file = file + 1;
     
                 this.fileMap.set(name, {
                     ...fileInfo,
                     min,
                     max,
                     total,
+                    file
                 });
             } 
         } else {
-            this.fileMap.set(name, {min: size, max:size, total: size});
+            this.fileMap.set(name, {min: size, max:size, total: size, file: 1});
         }
     
     }
