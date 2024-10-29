@@ -8,7 +8,14 @@ test('get list correctly', async () => {
     const list = await getList({dir});
     const res = [
       { name: 'js', min: 220, max: 440, total: 660, file:2 },
-      { name: 'css', min: 129, max: 129, total: 258, file:2 }
+      { name: 'css', min: 129, max: 129, total: 258, file:2 },
+      {
+        name: "subtotal",
+        total: 918,
+        max: 440,
+        min: 129,
+        file: 4
+      }
     ];
     assert.equal(list, res);
   });
@@ -18,6 +25,13 @@ test('get list by group correctly', async () => {
     const list = await getListByGroup({dir, group:['js,css']});
     const res = [
       { name: 'js,css', min: 129, max: 440, total: 918, file: 4 },
+      {
+        name: "subtotal",
+        total: 918,
+        max: 440,
+        min: 129,
+        file: 4
+      }
     ];
     assert.equal(list, res);
   });

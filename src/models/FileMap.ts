@@ -10,16 +10,35 @@ export default class FileMap {
     }
 
     getFileTable () {
-        const res = [] as FileItem[];
+        const subtotal = {
+            name: 'subtotal',
+            total: 0,
+            max: 0,
+            min: 0,
+            file: 0,
+        } as FileItem;
+        const collector = [] as FileItem[];
         this.fileMap.forEach((fileItem,key) => {
-            res.push({
+            collector.push({
                 name: key,
                 ...fileItem
             });
+            subtotal.total += fileItem.total;
+            if(fileItem.max > subtotal.max) {
+                subtotal.max = fileItem.max;
+            }
+            if(fileItem.min < subtotal.min || subtotal.min === 0) {
+                subtotal.min = fileItem.min;
+            }
+            subtotal.file += fileItem.file;
         })
-        return res.sort((a,b) => {
-           return b.total - a.total
-        })
+        const res = collector.sort((a,b) => {
+            return b.total - a.total
+         });
+
+
+        res.push(subtotal);
+        return res;
     }
 
     setFileMap (name: string, size: number) {

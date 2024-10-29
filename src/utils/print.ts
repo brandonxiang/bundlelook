@@ -16,6 +16,7 @@ export function formatFileItem(table: FileItem[]) {
         total: formatBytes(item.total),
         max: formatBytes(item.max),
         min: formatBytes(item.min),
+        file: item.file,
     }))
 }
 
