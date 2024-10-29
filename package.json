@@ -1,6 +1,6 @@
 {
   "name": "bundlelook",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Here is the lookup for bundle content",
   "files": [
     "dist"
@@ -18,7 +18,9 @@
     "type": "git",
     "url": "git@github.com:brandonxiang/bundlelook.git"
   },
-  "keywords": ["bundle information"],
+  "keywords": [
+    "bundle information"
+  ],
   "author": "brandonxiang",
   "license": "MIT",
   "dependencies": {
