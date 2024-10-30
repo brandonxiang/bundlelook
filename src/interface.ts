@@ -23,4 +23,5 @@ export interface CommandOption {
     filter?: string;
     group?: string | string[];
     total?: boolean;
+    sizeLimit?: string;
 }

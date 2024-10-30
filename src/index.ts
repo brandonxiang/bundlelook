@@ -28,7 +28,7 @@ export const cluster = async(dir: string, opts: CommandOption) => {
 
 export const single = async(dir: string, opts: CommandOption) => {
     dir = dir || process.cwd();
-    const table = await getDetailByFilter({dir, filter:opts.filter});
+    const table = await getDetailByFilter({dir, filter:opts.filter, sizeLimit: +(opts.sizeLimit || 0)});
     console.table(formatSizeItem(table));
 }
 
