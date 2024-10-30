@@ -15,19 +15,25 @@ export {
     getDirSize,
 }
 
-export const command = async(dir: string, opts: CommandOption) => {
+export const cluster = async(dir: string, opts: CommandOption) => {
     dir = dir || process.cwd();
-    if(opts.total) {
-        const total = await getDirSize({dir});
-        console.log(`The total size is ${formatBytes(total)} in this directory!!!`)
-    } else if(opts.group) {
+    if(opts.group) {
         const table = await getListByGroup({dir, group: opts.group});
         console.table(formatFileItem(table));
-    } else if(opts.filter) {
-        const table = await getDetailByFilter({dir, filter:opts.filter});
-        console.table(formatSizeItem(table));
     } else {
         const table = await getList({dir});
         console.table(formatFileItem(table));
     }
+}
+
+export const single = async(dir: string, opts: CommandOption) => {
+    dir = dir || process.cwd();
+    const table = await getDetailByFilter({dir, filter:opts.filter});
+    console.table(formatSizeItem(table));
+}
+
+export const total = async(dir: string) => {
+    dir = dir || process.cwd();
+    const total = await getDirSize({dir});
+    console.log(`The total size is ${formatBytes(total)} in this directory!!!`)
 }

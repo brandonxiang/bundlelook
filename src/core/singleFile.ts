@@ -1,16 +1,28 @@
 import fg from "fast-glob";
 import path from 'path';
 import fs from "fs";
-export const sortFile = (files :string[], dir: string) => {
+import { SizeItem } from "../interface";
+
+export const sortFile = (sizeItems: SizeItem[], sizeLimit?: number) => {
+    return sizeItems.filter(item => {
+        if(sizeLimit) {
+            return item.size > sizeLimit;
+        }
+        return true;
+    })
+    .sort((a,b) => {
+        return b.size - a.size
+    });
+}
+
+export const getFileSize = (files: string[], dir: string) => {
     return files.map(file => {
         const stat = fs.statSync(path.resolve(dir, file));
         return {
             path: file, 
             size: stat.size
         }
-    }).sort((a,b) => {
-        return b.size - a.size
-    });
+    })
 }
 
 /**
@@ -19,8 +31,9 @@ export const sortFile = (files :string[], dir: string) => {
  * @param opts 
  * @returns 
  */
- export const getDetailByFilter = async (params: {dir: string, filter: string}) => {
-    const allFiles = await fg(`**/**.${params.filter}`, {cwd: params.dir});
-    const res = sortFile(allFiles, params.dir);
-    return res;
+ export const getDetailByFilter = async (params: {dir: string, filter?: string, sizeLimit?: number }) => {
+    const pattern = params.filter ? `**/**.${params.filter}` : `**/**`;
+    const allFiles = await fg(pattern, {cwd: params.dir});
+    const res = getFileSize(allFiles, params.dir);
+    return sortFile(res, params.sizeLimit);
 }

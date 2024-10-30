@@ -10,6 +10,14 @@ test('get list correctly', async () => {
     assert.equal(list, res);
   });
 
+test('get list with size limit correctly', async () => {
+    const dir = path.resolve('tests/__fixtures__/list');
+    const list = await getDetailByFilter({dir, filter: 'js', sizeLimit: 300});
+    const res = [ { path: '1.js', size: 440 }]
+    assert.equal(list, res);
+  });
+
+
 
 test.run();
   
