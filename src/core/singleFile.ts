@@ -32,7 +32,13 @@ export const getFileSize = (files: string[], dir: string) => {
  * @returns 
  */
  export const getDetailByFilter = async (params: {dir: string, filter?: string, sizeLimit?: number }) => {
-    const pattern = params.filter ? `**/**.${params.filter}` : `**/**`;
+    let pattern = `**/**`;
+    if(params.filter) {
+        pattern = `**/**.${params.filter}`;
+    }
+    if(params.filter?.includes(',')) {
+        pattern = `**/**.{${params.filter}}`;
+    }
     const allFiles = await fg(pattern, {cwd: params.dir});
     const res = getFileSize(allFiles, params.dir);
     return sortFile(res, params.sizeLimit);

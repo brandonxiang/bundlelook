@@ -66,7 +66,7 @@ const res = getListByGroup({ dir: 'src', group: ['js,ts,tsx', 'png,jpg'] })
 
 ```javascript
 import { getDetailByFilter } from 'bundlelook'
-const res = getDetailByFilter({ dir: 'src', filter: 'js' })
+const res = getDetailByFilter({ dir: 'src', filter: 'js', size: 1000000 })
 ```
 
 结果:
